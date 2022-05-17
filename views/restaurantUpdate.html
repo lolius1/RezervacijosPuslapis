@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand" href="Restaurants">LukReserve</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="ReservationStatus">Rezervacijų priėmimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="ActiveReservations">Aktyvios rezervacijos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="Restaurant">Restorano pridėjimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="RestaurantUpdate">Restorano informacijos redagavimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="UserUpdate">Vartotojo informacijos redagavimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="Login">Atsijungti</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center">
+        <form class="border border-2 rounded-3 border-dark float-right w-50 d-grid gap-3"
+            style="padding-left:10px;padding-right:10px" id="restaurantUpdate-form">
+            <h1 class="text-center mb-2 text-dark"><b>Restorano redagavimas</b></h1>
+            <div class="form-group" style="position: relative">
+                <label class="text-dark"><b>Pavadinimas</b></label>
+                <input class="form-control" type="text" id="inputName" placeholder="Įrašykite pavadinimą"
+                    value="<%=restaurant.name%>" />
+            </div>
+            <div class="form-group">
+                <label class="text-dark " for="inputAddress"><b>Adresas</b></label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Įrašykite adresą"
+                    value="<%=restaurant.address%>" required>
+            </div>
+            <div class="form-group">
+                <label class="text-dark" for="inputDescription"><b>Aprašymas</b></label>
+                <input type="text" class="form-control" id="inputDescription" placeholder="Įrašykite aprašymą"
+                    value="<%=restaurant.description%>" required>
+            </div>
+            <div class="form-group row" style="padding-left:10px;padding-right:10px">
+                <div class="col">
+                    <label class="text-dark" for="inputTimeStart"><b>Darbo laiko pradžia</b></label>
+                    <input type="time" class="form-control" id="inputTimeStart" required>
+                    <script>
+                        const start = moment("<%=restaurant.workStart%>").format('HH:mm')
+                        document.getElementById("inputTimeStart").value = start
+                    </script>
+                </div>
+                <div class="col">
+                    <label class="text-dark" for="inputTimeEnd"><b>Darbo laiko pabaiga</b></label>
+                    <input type="time" class="form-control" id="inputTimeEnd" required>
+                    <script>
+                        const end = moment("<%=restaurant.workEnd%>").format('HH:mm')
+                        document.getElementById("inputTimeEnd").value = end
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-dark " for="inputCategory"><b>Kategorija</b></label>
+                <input type="text" class="form-control" id="inputCategory" placeholder="Įrašykite kategoriją"
+                    value="<%=restaurant.category%>" required>
+            </div>
+            <div class="form-group">
+                <label class="text-dark " for="inputContacts"><b>Kontaktai</b></label>
+                <input type="text" class="form-control" id="inputContacts" placeholder="Įrašykite numerį"
+                    value="<%=restaurant.contacts%>" required>
+            </div>
+            <div class="form-group">
+                <label class="text-dark " for="inputPeople"><b>Vietų skaičius</b></label>
+                <input type="text" class="form-control" id="inputPeople" placeholder="Įrašykite vietų skaičių"
+                    value="<%=restaurant.numberOfSeats%>" required>
+            </div>
+            <div class="d-grid" style="padding-bottom:10px">
+                <button type="submit" value="Submit" class="btn btn-success">Redaguoti restoraną</button>
+            </div>
+        </form>
+        <script>
+            const form = document.getElementById('restaurantUpdate-form')
+            form.addEventListener('submit', reservation)
+            async function reservation(event) {
+                event.preventDefault()
+                const name = document.getElementById('inputName').value
+                const address = document.getElementById('inputAddress').value
+                const category = document.getElementById('inputCategory').value
+                const description = document.getElementById('inputDescription').value
+                const workStartTime = document.getElementById('inputTimeStart').value
+                const workEndTime = document.getElementById('inputTimeEnd').value
+                const numberOfSeats = document.getElementById('inputPeople').value
+                const contacts = document.getElementById('inputContacts').value
+                const today = new Date();
+                const workStart = new Date(Date.parse(today.toDateString() + ' ' + workStartTime));
+                const workEnd = new Date(Date.parse(today.toDateString() + ' ' + workEndTime));
+                const result = fetch('/RestaurantUpdate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        address,
+                        description,
+                        category,
+                        workStart,
+                        workEnd,
+                        contacts,
+                        numberOfSeats
+                    })
+                }).then(res => res.json())
+            }
+        </script>
+    </div>
+
+</body>

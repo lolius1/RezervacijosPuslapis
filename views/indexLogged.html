@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Restaurants">LukReserve</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="ReservationStatus">Rezervacijų priėmimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="ActiveReservations">Aktyvios rezervacijos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="Restaurant">Restorano pridėjimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="RestaurantUpdate">Restorano informacijos redagavimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="UserUpdate">Vartotojo informacijos redagavimas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="Login">Atsijungti</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Restaurant list -->
+    <div class="container py-5">
+        <div class="row text-center text-white mb-5">
+            <div class="col-lg-7 mx-auto">
+                <h1 class="display-4 text-dark">Restoranai</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- List group-->
+                <ul class="list-group shadow">
+                    <!-- list group item-->
+                    <%restaurantsList.forEach(restaurant => {%>
+                    <li class="list-group-item border border-2 rounded-3 border-dark">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2 text-dark" onclick="passRestaurantData(this)"
+                                    style="cursor: pointer" id="<%=restaurant.name%>"><%=restaurant.name%></h5>
+                                <p class="font-italic text-muted mb-0 small" id="resAddress"><b>Adresas:
+                                    </b><%=restaurant.address%>
+                                </p>
+                                <p class="font-italic text-muted mb-0 small" id="resCategory<%=restaurant.name%>"><b>Kategorija:
+                                    </b><%=restaurant.category%>
+                                </p>
+                                <p class="font-italic text-muted mb-0 small" id="resDesc"><b>Aprašymas:
+                                    </b><%=restaurant.description%>
+                                </p>
+                                <p class="font-italic text-muted mb-0 small" id="resWorkTime<%=restaurant.name%>">
+                                    <b>Darbo laikas:
+                                    </b><%=restaurant.workStart.toLocaleString('lt-LT', {hour: '2-digit', minute:'2-digit'})%>-<%=restaurant.workEnd.toLocaleString('lt-LT', {hour: '2-digit', minute:'2-digit'})%>
+                                </p>
+                                <p class="font-italic text-muted mb-0 small" id="resContacts"><b>Kontaktai:
+                                    </b><%=restaurant.contacts%>
+                                </p>
+                                <p class="font-italic text-muted mb-0 small" id="resSeats<%=restaurant.name%>"><b>Vietų kiekis vienai rezervacijai:
+                                </b><%=restaurant.numberOfSeats%>
+                            </p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                </div>
+                            </div><img src="./img/download.png" alt="Generic placeholder image" width="200"
+                                class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                        <%})%>
+                </ul> <!-- End -->
+            </div>
+        </div>
+    </div>
+    <script>
+        function passRestaurantData(restaurantName) {
+            const maxSeats = document.getElementById('resSeats'+restaurantName.id).textContent;
+            console.log(document.getElementById('resSeats'+restaurantName.id).textContent)
+            const name = document.getElementById(restaurantName.id).innerHTML;
+            const workTime = document.getElementById('resWorkTime'+restaurantName.id).innerHTML;
+            const category = document.getElementById('resCategory'+restaurantName.id).innerHTML;
+            const html = document.getElementById('resSeats'+restaurantName.id).innerHTML;
+            
+            localStorage.setItem('clickedName', name);
+            localStorage.setItem('clickedWorktime', workTime);
+            localStorage.setItem('clickedCategory', category);
+            localStorage.setItem('clickedSeats', maxSeats);
+            localStorage.setItem('clickedSeatsHtml', html);
+            location.href = '/reservation';
+            return false;
+        }
+    </script>
+</body>
+
+</html>
